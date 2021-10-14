@@ -6,7 +6,7 @@ function AllTheThings({ products, addToCart }) {
       <li
         key={index}
         onClick={() => {
-          addToCart(element.name, element.price);
+          addToCart(element);
         }}
       >
         {element.name} - ${element.price}

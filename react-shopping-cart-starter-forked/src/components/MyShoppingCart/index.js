@@ -1,12 +1,12 @@
 import React from "react";
 
-function MyShoppingCart({cart, removeFromCart}) {
+function MyShoppingCart({ cart, removeFromCart }) {
   const cartList = cart.map((element, index) => {
     return (
       <li
         key={index}
         onClick={() => {
-          removeFromCart(element.id);
+          removeFromCart(index);
         }}
       >
         {element.name} - ${element.price}
