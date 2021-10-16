@@ -9,10 +9,17 @@ import productsArr from "./products";
 export default function App() {
   const [products, setProducts] = useState(productsArr);
   const [cart, setCart] = useState([]);
+  let id = 0;
 
-  function addToCart(item) {
-    setCart([...cart, item]);
+  // function addToCart(item) {
+  //   setCart([...cart, item]);
+  // }
+
+  function addToCart(name, price) {
+    id++;
+    setCart([...cart, { name: name, price: price, id: id }]);
   }
+
   function removeFromCart(id) {
     const itemsInCart = cart.filter((element, index) => index !== id);
     setCart(itemsInCart);

@@ -1,31 +1,57 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
+
+const re = /^\d+\.\d{2}$/;
 
 function Form(props) {
-  const inputName = useRef();
-  const inputPrice = useRef();
-  const inputDescription = useRef();
+  const [newProduct, setnewProduct] = useState({
+    name: "",
+    price: "",
+    description: "",
+  });
+  const [isPriceValid, setisPriceValid] = useState(true);
 
+  function handleNameChange(event) {
+    setnewProduct({ ...newProduct, name: event.target.value });
+  }
+  function handlePriceChange(event) {
+    setnewProduct({ ...newProduct, price: event.target.value });
+  }
+  function handleDescriptionChange(event) {
+    setnewProduct({ ...newProduct, description: event.target.value });
+  }
   function handleSubmit() {
-    props.onSubmit(
-      inputName.current.value,
-      inputPrice.current.value,
-      inputDescription.current.value
-    );
+    if (isPriceValid) {
+      props.onSubmit(newProduct);
+    }
+  }
+
+  function checkPrice() {
+    const priceToCheck = re.test(newProduct.price);
+    setisPriceValid(priceToCheck);
   }
 
   return (
     <div className="Form">
       <input
         name="name"
-        type="text"
-        ref={inputName}
-        placeholder="product name"
+        // value={newProduct.name}
+        onChange={handleNameChange}
+        placeholder="name"
       />
-      <input name="price" type="text" ref={inputPrice} placeholder="price" />
+      <input
+        name="price"
+        // value={newProduct.price}
+        type="text"
+        onChange={handlePriceChange}
+        placeholder="price"
+        onBlur={checkPrice}
+      />
+      {isPriceValid ? "" : <p>Accepts only 2 digit number</p>}
       <input
         name="description"
+        // value={newProduct.description}
         type="text"
-        ref={inputDescription}
+        onChange={handleDescriptionChange}
         placeholder="description"
       />
       <input type="submit" onClick={handleSubmit} />

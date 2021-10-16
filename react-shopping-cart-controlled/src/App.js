@@ -18,11 +18,8 @@ export default function App() {
     setCart(itemsInCart);
   }
 
-  function submit(name, price, description) {
-    setProducts([
-      { name: name, price: price, description: description },
-      ...products,
-    ]);
+  function submit(newProduct) {
+    setProducts([newProduct, ...products]);
   }
 
   return (
