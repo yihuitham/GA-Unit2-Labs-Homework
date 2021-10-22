@@ -1,34 +1,43 @@
 import React, { createContext, useContext, useReducer } from "react";
 import lightData from "../lightData";
 
-const LightContext = createContext();
+const NameContext = createContext();
+const ColorContext = createContext();
 
-const lightReducer = (state, action) => {
+const nameArray = lightData.map((element) => element.name);
+const lightColorArray = lightData.map((element) => element.color);
+
+const colorReducer = (state, action) => {
   switch (action) {
     case "off":
-      return lightData[0];
+      return lightColorArray[0];
     case "low":
-      return lightData[1];
-    case "medium":
-      return lightData[2];
+      return lightColorArray[1];
+    case "med":
+      return lightColorArray[2];
     case "high":
-      return lightData[3];
+      return lightColorArray[3];
     default:
-      return lightData[0];
+      return lightColorArray[0];
   }
 };
 
-function useLightContext() {
-  return useContext(LightContext);
+function useNameContext() {
+  return useContext(NameContext);
+}
+
+function useColorContext() {
+  return useContext(ColorContext);
 }
 
 function LightProvider({ children }) {
-  const [lightState, dispatch] = useReducer(lightReducer, lightData[0]);
+  const [colorState, dispatch] = useReducer(colorReducer, lightColorArray[0]);
+  console.log(nameArray, lightColorArray);
   return (
-    <LightContext.Provider value={[lightState, dispatch]}>
-      {children}
-    </LightContext.Provider>
+    <ColorContext.Provider value={[colorState, dispatch]}>
+      <NameContext.Provider value={nameArray}>{children}</NameContext.Provider>
+    </ColorContext.Provider>
   );
 }
 
-export { LightProvider, useLightContext };
+export { LightProvider, useNameContext, useColorContext };

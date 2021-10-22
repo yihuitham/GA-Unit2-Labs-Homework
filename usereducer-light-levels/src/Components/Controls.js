@@ -1,12 +1,21 @@
 import React from "react";
-import { useLightContext } from "../contexts/lightContext";
+import { useNameContext, useColorContext } from "../contexts/lightContext";
 
 function Controls(props) {
-  const [lightState, dispatch] = useLightContext();
+  const nameArray = useNameContext();
+  const [colorState, dispatch] = useColorContext();
 
-  const lightButtons = props.controls.map((d, i) => {
+  const lightButtons = nameArray.map((d, i) => {
     return (
-      <button key={i} onClick={() => dispatch(d)}>
+      <button
+        key={i}
+        onClick={() => {
+          {
+            dispatch(d);
+          }
+          console.log(d);
+        }}
+      >
         {d}
       </button>
     );
