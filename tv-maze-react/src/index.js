@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import Home from "./components/Home";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { TVMazeContextProvider } from "./context/TVMazeContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <TVMazeContextProvider>
+      <Home />
+    </TVMazeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

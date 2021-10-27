@@ -12,7 +12,7 @@ function useHasSearchedContext() {
 }
 
 function TVMazeContextProvider({ children }) {
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
   return (
     <QueryContext.Provider value={[query, setQuery]}>
